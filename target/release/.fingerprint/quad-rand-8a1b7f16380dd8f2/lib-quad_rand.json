@@ -1,0 +1,1 @@
+{"rustc":16285725380928457773,"features":"[]","declared_features":"[\"rand\"]","target":5427166058971797800,"profile":2040997289075261528,"path":7627040794580161328,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"release/.fingerprint/quad-rand-8a1b7f16380dd8f2/dep-lib-quad_rand","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
