@@ -155,8 +155,9 @@ async fn main() {
                                 }
                             }
 
-                            if is_key_pressed(KeyCode::Down) && end < filtered_indices.len() { scroll_offset += 1; }
-                            if is_key_pressed(KeyCode::Up) && scroll_offset > 0 { scroll_offset -= 1; }
+                            let (_, wheel_y) = mouse_wheel();
+                            if wheel_y < 0.0 && end < filtered_indices.len() { scroll_offset += 1; }
+                            if wheel_y > 0.0 && scroll_offset > 0 { scroll_offset -= 1; }
                         }
                         StatsCategory::Animal => {
                             draw_text("#      SPECIES     SPEED    VISION    ENERGY", 60.0, start_y, 25.0, WHITE);
@@ -179,8 +180,9 @@ async fn main() {
                                 draw_text(&format!("{:.0}%", animal.energy.clamp(0.0, 100.0)), 470.0, y, 20.0, GREEN);
                             }
 
-                            if is_key_pressed(KeyCode::Down) && end < world.animals.len() { scroll_offset += 1; }
-                            if is_key_pressed(KeyCode::Up) && scroll_offset > 0 { scroll_offset -= 1; }
+                            let (_, wheel_y) = mouse_wheel();
+                            if wheel_y < 0.0 && end < world.animals.len() { scroll_offset += 1; }
+                            if wheel_y > 0.0 && scroll_offset > 0 { scroll_offset -= 1; }
                         }
                     }
 

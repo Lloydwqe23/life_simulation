@@ -3,7 +3,7 @@ use ::rand::Rng;
 use noise::{NoiseFn, Perlin};
 
 // --- КОНСТАНТИ ---
-const GRID_SIZE: usize = 1000;
+const GRID_SIZE: usize = 200;
 const MATING_DISTANCE: f32 = 1.2;
 const COOLDOWN_TIME: f32 = 150.0;
 const REPRODUCTION_THRESHOLD: f32 = 90.0;
@@ -407,7 +407,11 @@ impl World {
                     pos: vec2(x as f32 + 0.5, y as f32 + 0.5),
                     energy: 80.0 + rng.gen_range(0.0..40.0),
                     reproduce_cooldown: 0.0,
-                    speed: rng.gen_range(0.08..0.18),
+                    speed: match species {
+                        AnimalSpecies::Horse => rng.gen_range(0.2..0.32),
+                        AnimalSpecies::Cow =>   rng.gen_range(0.1..0.2),
+                        AnimalSpecies::Pig =>   rng.gen_range(0.08..0.17),
+                    },
                     vision: rng.gen_range(6.0..14.0),
                     species,
                 });
@@ -763,7 +767,11 @@ impl World {
                         pos: self.animals[i].pos,
                         energy: 40.0,
                         reproduce_cooldown: animal_reproduction_cooldown(species),
-                        speed: (cs * rng.gen_range(0.95..1.05)).clamp(0.04, 0.3),
+                        speed: match species {
+                            AnimalSpecies::Horse => (cs * rng.gen_range(0.95..1.05)).clamp(0.14, 0.38),
+                            AnimalSpecies::Cow =>   (cs * rng.gen_range(0.95..1.05)).clamp(0.07, 0.26),
+                            AnimalSpecies::Pig =>   (cs * rng.gen_range(0.95..1.05)).clamp(0.05, 0.2),
+                        },
                         vision: (cv * rng.gen_range(0.95..1.05)).clamp(4.0, 20.0),
                         species,
                     });
